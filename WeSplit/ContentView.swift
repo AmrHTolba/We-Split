@@ -9,29 +9,28 @@ import SwiftUI
 
 struct ContentView: View {
     // MARK: - Variables
-    @State var tapCount: Int = 0
+    let students = ["Amr", "Hassan", "Mohamed"]
+    
+    @State var selectedStudent = "Amr"
     @State var name: String = ""
     
     var body: some View {
         NavigationStack {
             Form {
                 Section("Test") {
-                    Text("Hello, World 1")
                     TextField("Enter Data", text: $name)
                 }
                 Section("Test2") {
-                    Text("Hello, World 2")
-
+                    Picker("Select Your Fav Student", selection: $selectedStudent) {
+                        ForEach(students, id: \.self) {
+                            Text($0)
+                        }
+                    }
                 }
             }
-            
             .padding()
             .navigationTitle("SwiftUI")
             
-        }
-        Button("Tap Count: \(tapCount)") {
-            tapCount += 1
-            print(name)
         }
     }
 }
